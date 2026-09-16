@@ -62,7 +62,7 @@ def load_results(model, output, trials):
 
 
 def extend(observed, shadow, audio_path, noise_path, output, result, trials):
-    """Append held-out trials without recalibration, baseline, or runtime runs."""
+    """Append mitigation trials without recalibration, baseline, or runtime runs."""
     if observed.metadata != result["model"] or shadow.metadata != result["model"]:
         raise ValueError("model settings differ from saved results")
     if (
@@ -111,4 +111,4 @@ def extend(observed, shadow, audio_path, noise_path, output, result, trials):
                 )
             )
             save(output, result)
-    print(f"Completed {trials} held-out mitigation trials", flush=True)
+    print(f"Completed {trials} mitigation trials", flush=True)

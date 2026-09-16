@@ -6,4 +6,5 @@ __pycache__/
 figures/
 microphone.wav
 results.json
+mitigation_results.json
 runs/

@@ -25,7 +25,7 @@ if __name__ == "__main__":
 
         result = load_results(args.model, output, args.extend)
         if all(len(result[name]) == args.extend for name in GROUPS):
-            print(f"Already have {args.extend} held-out mitigation trials")
+            print(f"Already have {args.extend} mitigation trials")
             raise SystemExit(0)
     if args.model == "moshi":
         from moshi_probe import Probe

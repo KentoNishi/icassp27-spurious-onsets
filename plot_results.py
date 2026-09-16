@@ -374,13 +374,17 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("moshi", type=Path)
     parser.add_argument("personaplex", type=Path)
+    parser.add_argument("--mechanism-only", action="store_true",
+                        help="Generate Figure 2 only; use plot_mitigation.py for Figure 3.")
     args = parser.parse_args()
     results = tuple(
         json.loads(path.read_text()) for path in (args.moshi, args.personaplex)
     )
     OUT.mkdir(exist_ok=True)
     mechanism(results)
-    counterfactual(results)
+    if not args.mechanism_only:
+        print("Calibration diagnostic only; use plot_mitigation.py for paper Figure 3.")
+        counterfactual(results)
 
 
 if __name__ == "__main__":
