@@ -1,6 +1,8 @@
 # Causal Analysis and Mitigation of Spurious Onsets in Full-Duplex Speech LLMs
 
-Code for reproducing our Moshi and PersonaPlex experiments.
+Kento Nishi
+
+[arXiv](https://arxiv.org/abs/2609.13445)
 
 ## Setup
 
@@ -36,3 +38,16 @@ uv run plot_mitigation.py
 To analyze your own 500-rollout results with that split, append `--raw runs/moshi/results.json runs/personaplex/results.json`. Percentages are one-sided 95% exact binomial lower bounds. Figure 3 omits low-density tails for display only; `--density-floor 0` shows all scores. Figures are written to `figures/`.
 
 Paths, GPUs, and the PyTorch wheel index are defined in `config`.
+
+## Citation
+
+```bibtex
+@misc{nishi2026causal,
+  title={Causal Analysis and Mitigation of Spurious Onsets in Full-Duplex Speech LLMs},
+  author={Nishi, Kento},
+  year={2026},
+  eprint={2609.13445},
+  archivePrefix={arXiv},
+  primaryClass={cs.CL}
+}
+```
