@@ -6,43 +6,51 @@
 
 Why do full-duplex speech models start talking when the user is silent? We investigate this behavior in Moshi and PersonaPlex, and introduce an inference-time method to suppress spurious onsets while preserving genuine responses, without retraining.
 
-## Setup
+## Usage
 
-Linux, CUDA, two NVIDIA GPUs, and Hugging Face access to `nvidia/personaplex-7b-v1` are required.
-Paths, GPUs, and the PyTorch wheel index are set in `config`.
+### Setup
+
+Use Linux with CUDA and two NVIDIA GPUs. Request access to [PersonaPlex](https://huggingface.co/nvidia/personaplex-7b-v1), then run:
 
 ```bash
 ./build
 ./fetch-noise
 ```
 
-## Experiments
+Set GPU IDs and paths in [`config`](config).
+
+### Run experiments
 
 ```bash
-./calibrate
-./run
+./calibrate       # calibrate onset qualification
+./run             # 40 trials per model
+./run --extend 500 # full mitigation experiment
 ```
 
-`calibrate` derives onset qualification boundaries from the longest nonlexical gap across 40 responses per model. `run` performs the silence, counterfactual, threshold, and runtime experiments with 40 trials per model by default. Raw results go to `runs/`; summaries go to `results.json`.
+To reuse the [released calibration and initial results](https://github.com/KentoNishi/icassp27-spurious-onsets/releases/tag/results-2026-08-13), run `./run --extend 500` directly after setup. Results are saved in `runs/{moshi,personaplex}/results.json`.
 
-For full replication, use `./run --extend 500` to reach 500 mitigation rollouts per model. Running it directly after setup reuses the [released calibration and 40-trial results](https://github.com/KentoNishi/icassp27-spurious-onsets/releases/tag/results-2026-08-13). Onset qualification boundaries stay fixed; final analysis calibrates decision thresholds on 100 rollouts and evaluates the other 400. Results go to `runs/{moshi,personaplex}/results.json`.
+### Reproduce figures and results
 
-## Figures and results
-
-Figure 2:
+Plot the mechanism traces (Figure 2):
 
 ```bash
 ./.venv/moshi/bin/python plot_results.py runs/moshi/results.json runs/personaplex/results.json --mechanism-only
 ```
 
-Figure 3 and Table 1 from released scores and the frozen split (`uv` required; no GPU):
+Reproduce Figure 3 and Table 1 from the released results with `uv`:
 
 ```bash
 curl -fLO https://github.com/KentoNishi/icassp27-spurious-onsets/releases/download/results-2026-09-16/mitigation_results.json
 uv run plot_mitigation.py
 ```
 
-To analyze your own 500-rollout results with the same split, append `--raw runs/moshi/results.json runs/personaplex/results.json` to the plotting command. Percentages are one-sided 95% exact binomial lower bounds. Figure 3 omits low-density tails for display only; `--density-floor 0` shows all scores. Figures go to `figures/`.
+Or analyze your own 500-rollout results:
+
+```bash
+uv run plot_mitigation.py --raw runs/moshi/results.json runs/personaplex/results.json
+```
+
+The [analysis](plot_mitigation.py) uses 100 rollouts for threshold calibration and 400 for evaluation. Figures are saved in `figures/`.
 
 ## Citation
 
