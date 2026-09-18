@@ -15,8 +15,6 @@ Install on Linux with CUDA, two NVIDIA GPUs, and Hugging Face access to [Persona
 ./fetch-noise
 ```
 
-GPU IDs, paths, and the PyTorch wheel index are configured in `config`.
-
 ### Experiments
 
 Run the experiments with 40 trials per model:
@@ -32,7 +30,7 @@ For the paper's 500-rollout mitigation experiment:
 ./run --extend 500
 ```
 
-This resumes saved runs, or downloads the [initial results](https://github.com/KentoNishi/icassp27-spurious-onsets/releases/tag/results-2026-08-13) if run directly after setup. Results are saved in `runs/moshi/results.json` and `runs/personaplex/results.json`.
+The extended run can also reuse released results, so you can run it directly after setup.
 
 ### Figures
 
@@ -49,13 +47,7 @@ curl -fLO https://github.com/KentoNishi/icassp27-spurious-onsets/releases/downlo
 uv run plot_mitigation.py
 ```
 
-After downloading `mitigation_results.json` above, use the same split with your own 500-rollout results:
-
-```bash
-uv run plot_mitigation.py --raw runs/moshi/results.json runs/personaplex/results.json
-```
-
-Figures are saved in `figures/`.
+See `uv run plot_mitigation.py --help` for plotting options.
 
 ## Citation
 
