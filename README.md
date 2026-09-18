@@ -1,10 +1,8 @@
 # Causal Analysis and Mitigation of Spurious Onsets in Full-Duplex Speech LLMs
 
-[Kento Nishi](https://kentonishi.com/)
+Kento Nishi
 
 [arXiv](https://arxiv.org/abs/2609.13445) / [PDF](https://arxiv.org/pdf/2609.13445)
-
-Why do full-duplex speech models start talking when the user is silent? We investigate this behavior in Moshi and PersonaPlex, and introduce an inference-time method to suppress spurious onsets while preserving genuine responses, without retraining.
 
 ## Usage
 
