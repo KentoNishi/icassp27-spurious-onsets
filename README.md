@@ -2,7 +2,7 @@
 
 [Kento Nishi](https://kentonishi.com/)
 
-[arXiv](https://arxiv.org/abs/2609.13445) / [PDF](https://arxiv.org/pdf/2609.13445) / [Results](https://github.com/KentoNishi/icassp27-spurious-onsets/releases)
+[arXiv](https://arxiv.org/abs/2609.13445) / [PDF](https://arxiv.org/pdf/2609.13445)
 
 Why do full-duplex speech models start talking when the user is silent? We investigate this behavior in Moshi and PersonaPlex, and introduce an inference-time method to suppress spurious onsets while preserving genuine responses, without retraining.
 
